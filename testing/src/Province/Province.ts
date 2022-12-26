@@ -7,7 +7,6 @@ export default class Province {
   private _totalProduction: number;
   private _demand: number;
   private _price: number;
-  private _demandCost: number;
 
   constructor(doc: doc) {
     const { name, demand, price, producers } = doc;
@@ -16,7 +15,6 @@ export default class Province {
     this._price = price;
     this._producers = [];
     this._totalProduction = 0;
-    this._demandCost = 0;
 
     producers.forEach((d) => this.addProducer(new Producer(this, d)));
   }
@@ -63,7 +61,7 @@ export default class Province {
   }
 
   get profit() {
-    return this.demandValue - this._demandCost;
+    return this.demandValue - this.demandCost;
   }
 
   get demandValue() {
@@ -75,7 +73,7 @@ export default class Province {
   }
 
   get demandCost() {
-    let remainingDemand = this.demand;
+    let remainingDemand = this._demand;
     let result = 0;
     this.producers
       .sort((a, b) => a.cost - b.cost)

@@ -1,4 +1,4 @@
-import { producer, doc } from '../types/types';
+import { doc } from '../types/types';
 
 export const sampleProvinceData = (): doc => {
   return {
